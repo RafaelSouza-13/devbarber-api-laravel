@@ -68,4 +68,8 @@ class User extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function favorites(){
+        return $this->belongsToMany(Barber::class, 'users_favorites', 'user_id', 'barber_id');
+    }
 }
