@@ -16,8 +16,8 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('/user', [UserController::class, 'findAll']);
     Route::put('/user', [UserController::class, 'update']);
-    Route::get('/user/favorites', [UserFavoriteController::class, 'findAll']);
-    Route::post('/user/favorites', [UserFavoriteController::class, 'create']);
+    Route::get('/user/favorites', [UserController::class, 'findAllFavorites']);
+    Route::post('/user/favorites', [UserController::class, 'createFavorite']);
 
     Route::get('/user/appointments', [UserAppointmentController::class, 'findAll']);
 
