@@ -16,5 +16,24 @@ class UserController extends Controller
         $user->name = $data['name'];
         $user->email = $data['email'];
         $user->password = bcrypt($data['password']);
+        $user->save();
+
+        $token = auth()->attempt([
+            'email' => $user->email,
+            'password' => $data['password']
+        ]);
+
+        if(!$token){
+            return response()->json([
+                'success' => false,
+                'message' => "Erro ao gerar token",
+            ], 500);
+        }
+
+        $data['user']['name'] = $user->name;
+        $data['user']['email'] = $user->email;
+        $data['user']['avatar'] = url('media/avatars'.$user->avatar);
+        $data['token'] = $token;
+        return response()->json($data, 201);
     }
 }
