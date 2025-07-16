@@ -11,6 +11,9 @@ class Barber extends Model
     use HasFactory;
     protected $table = 'barbers';
     public $timestamps = false;
+    protected $appends = ['avatar_url'];
+
+    protected $hidden = ['avatar'];
 
     public function avaliability(){
         return $this->hasMany(BarberAvailability::class, 'barber_id');
@@ -37,5 +40,9 @@ class Barber extends Model
 
     public function favorites(){
         return $this->belongsToMany(User::class, 'users_favorites', 'barber_id', 'user_id');
+    }
+
+    public function getAvatarUrlAttribute(){
+        return $this->avatar ? url('media/avatars/' . $this->avatar) : null;
     }
 }
