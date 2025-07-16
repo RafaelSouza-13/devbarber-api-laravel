@@ -36,4 +36,8 @@ class UserController extends Controller
         $data['token'] = $token;
         return response()->json($data, 201);
     }
+
+    public function find(){
+        return response()->json(auth()->user(), 200);
+    }
 }

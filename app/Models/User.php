@@ -14,7 +14,7 @@ class User extends Authenticatable implements JWTSubject
     use HasFactory, Notifiable;
     public $timestamps = false;
 
-
+    protected $appends = ['avatar_url'];
     /**
      * The attributes that are mass assignable.
      *
@@ -34,6 +34,7 @@ class User extends Authenticatable implements JWTSubject
     protected $hidden = [
         'password',
         'remember_token',
+        'avatar',
     ];
 
     /**
@@ -73,5 +74,9 @@ class User extends Authenticatable implements JWTSubject
 
     public function favorites(){
         return $this->belongsToMany(Barber::class, 'users_favorites', 'user_id', 'barber_id');
+    }
+
+    public function getAvatarUrlAttribute(){
+        return $this->avatar ? url('media/avatars/' . $this->avatar) : null;
     }
 }
