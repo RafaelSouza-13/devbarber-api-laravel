@@ -31,6 +31,6 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/search', [BarberController::class, 'search']);
 
 });
-
+Route::get('/401', [AuthController::class, 'unauthorized'])->name('login');
 Route::post('/auth/login', [AuthController::class, 'login']);
 Route::post('/user', [UserController::class, 'create']);

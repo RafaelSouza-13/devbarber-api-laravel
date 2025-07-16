@@ -27,4 +27,18 @@ class AuthController extends Controller
         $data['token'] = $token;
         return response()->json($data, 200);
     }
+
+    public function logout(){
+        auth()->logout();
+        return response()->json(['message' => 'logout realizado com sucesso'], 200);
+    }
+
+    public function refresh(){
+        $data['token'] = auth()->refresh();
+        return response()->json($data, 200);
+    }
+
+    public function unauthorized(){
+        return response()->json(['error' => 'Não autorizado'], 401);
+    }
 }
