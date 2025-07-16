@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('barbers_avaliability', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barber_id')->constrained('barbers')->onDelete('cascade');
-            $table->integer('weekday');
-            $table->integer('hours');
+            $table->string('weekday');
+            $table->time('hours');
         });
     }
 

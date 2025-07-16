@@ -14,9 +14,9 @@ return new class extends Migration
         Schema::create('barbers_testimonials', function (Blueprint $table) {
             $table->id();
             $table->foreignId('barber_id')->constrained('barbers')->onDelete('cascade');
-            $table->string('name');
+            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
             $table->float('rate');
-            $table->float('body');
+            $table->text('body');
         });
     }
 
